@@ -1,0 +1,4 @@
+name: ZombieVirus
+version: '1.0-SNAPSHOT'
+main: me.milkycoding.zombieVirus.ZombieVirus
+api-version: '1.21'
