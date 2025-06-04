@@ -3,18 +3,11 @@ package me.milkycoding.zombievirus.utils;
 import me.milkycoding.zombievirus.ZombieVirus;
 import org.bukkit.configuration.file.FileConfiguration;
 
-/**
- * Утилитный класс для работы с конфигурацией
- */
 public class ConfigUtils {
     private static FileConfiguration config;
     private static double infectionChance;
     private static int stageDuration;
 
-    /**
-     * Загрузка конфигурации
-     * @param plugin Экземпляр плагина
-     */
     public static void loadConfig(ZombieVirus plugin) {
         plugin.reloadConfig();
         config = plugin.getConfig();
@@ -30,24 +23,16 @@ public class ConfigUtils {
         return config.getString("prefix", "&8[&cZombieVirus&8] &r");
     }
 
-    /**
-     * Получить шанс заражения
-     * @return Шанс заражения (0.0 - 1.0)
-     */
     public static double getInfectionChance() {
         return infectionChance;
     }
 
-    /**
-     * Получить длительность стадии
-     * @return Длительность в секундах
-     */
     public static int getStageDuration() {
         return stageDuration;
     }
 
     public static int getSneezeInterval() {
-        return config.getInt("infection.sneeze-interval", 120); // 2 minutes in seconds
+        return config.getInt("infection.sneeze-interval", 120);
     }
 
     public static boolean isDebugEnabled() {

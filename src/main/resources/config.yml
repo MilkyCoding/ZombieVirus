@@ -23,7 +23,6 @@ messages:
   no-permission: "&cУ вас нет прав для использования этой команды!"
   
   # Command messages
-  command-help: "&cИспользование: /zombievirus <status|cure|reload>"
   player-only: "&cЭта команда только для игроков!"
   cure-usage: "&cИспользование: /zombievirus cure <игрок>"
   player-not-found: "&cИгрок не найден!"

@@ -11,14 +11,12 @@ public class ChatUtils {
     public static String color(String message) {
         if (message == null) return "";
         
-        // Convert HEX colors
         Matcher hexMatcher = HEX_PATTERN.matcher(message);
         while (hexMatcher.find()) {
             String hex = hexMatcher.group(1);
             message = message.replace("&#" + hex, ChatColor.of("#" + hex).toString());
         }
         
-        // Convert RGB colors
         Matcher rgbMatcher = RGB_PATTERN.matcher(message);
         while (rgbMatcher.find()) {
             int r = Integer.parseInt(rgbMatcher.group(1));
@@ -30,7 +28,6 @@ public class ChatUtils {
             );
         }
         
-        // Convert legacy colors
         return ChatColor.translateAlternateColorCodes('&', message);
     }
     

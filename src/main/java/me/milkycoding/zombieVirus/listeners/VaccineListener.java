@@ -13,10 +13,6 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-/**
- * Слушатель событий, связанных с вакцинами.
- * Обрабатывает создание и использование вакцин.
- */
 public class VaccineListener implements Listener {
     private final InfectionManager infectionManager;
     private final VaccineManager vaccineManager;
@@ -26,26 +22,17 @@ public class VaccineListener implements Listener {
         this.vaccineManager = ZombieVirus.getInstance().getVaccineManager();
     }
 
-    /**
-     * Обработка создания вакцины
-     * @param event Событие крафта предмета
-     */
     @EventHandler
     public void onVaccineCraft(CraftItemEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
         
         ItemStack result = event.getRecipe().getResult();
         if (vaccineManager.isVaccine(result)) {
-            vaccineManager.handleVaccineCreation(result);
             Player player = (Player) event.getWhoClicked();
             player.sendMessage(ChatUtils.format(ConfigUtils.getMessage("vaccine-created")));
         }
     }
 
-    /**
-     * Обработка использования вакцины
-     * @param event Событие взаимодействия игрока
-     */
     @EventHandler
     public void onVaccineUse(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
@@ -57,11 +44,9 @@ public class VaccineListener implements Listener {
             event.setCancelled(true);
             
             if (infectionManager.isInfected(player)) {
-                // Лечим игрока и удаляем вакцину
                 infectionManager.curePlayer(player);
                 player.sendMessage(ChatUtils.format(ConfigUtils.getMessage("vaccine-used")));
                 
-                // Удаляем одну вакцину из инвентаря
                 if (item.getAmount() > 1) {
                     item.setAmount(item.getAmount() - 1);
                 } else {

@@ -10,10 +10,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-/**
- * Обработчик команд плагина.
- * Реализует команды для проверки статуса заражения, лечения и перезагрузки конфигурации.
- */
 public class ZombieVirusCommand implements CommandExecutor {
     private final InfectionManager infectionManager;
 
@@ -30,7 +26,6 @@ public class ZombieVirusCommand implements CommandExecutor {
 
         switch (args[0].toLowerCase()) {
             case "status":
-                // Проверка статуса заражения
                 if (!(sender instanceof Player)) {
                     sender.sendMessage(ChatUtils.format(ConfigUtils.getMessage("player-only")));
                     return true;
@@ -39,7 +34,6 @@ public class ZombieVirusCommand implements CommandExecutor {
                 break;
 
             case "cure":
-                // Лечение игрока
                 if (!sender.hasPermission("zombievirus.cure")) {
                     sender.sendMessage(ChatUtils.format(ConfigUtils.getMessage("no-permission")));
                     return true;
@@ -52,7 +46,6 @@ public class ZombieVirusCommand implements CommandExecutor {
                 break;
 
             case "reload":
-                // Перезагрузка конфигурации
                 if (!sender.hasPermission("zombievirus.admin")) {
                     sender.sendMessage(ChatUtils.format(ConfigUtils.getMessage("no-permission")));
                     return true;
@@ -69,10 +62,6 @@ public class ZombieVirusCommand implements CommandExecutor {
         return true;
     }
 
-    /**
-     * Обработка команды проверки статуса
-     * @param player Игрок
-     */
     private void handleStatus(Player player) {
         if (infectionManager.isInfected(player)) {
             player.sendMessage(ChatUtils.format(ConfigUtils.getMessage("infected")));
@@ -82,11 +71,6 @@ public class ZombieVirusCommand implements CommandExecutor {
         }
     }
 
-    /**
-     * Обработка команды лечения
-     * @param sender Отправитель команды
-     * @param targetName Имя целевого игрока
-     */
     private void handleCure(CommandSender sender, String targetName) {
         Player target = Bukkit.getPlayer(targetName);
         if (target == null) {

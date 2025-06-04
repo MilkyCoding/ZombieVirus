@@ -16,9 +16,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
-/**
- * Менеджер заражения, отвечающий за управление зараженными игроками и прогрессией вируса.
- */
+
 public class InfectionManager {
     // Хранилище зараженных игроков и их стадий
     private final Map<UUID, VirusStage> infectedPlayers;
@@ -36,10 +34,7 @@ public class InfectionManager {
         this.random = new Random();
     }
 
-    /**
-     * Обработка появления зомби
-     * @param zombie Зомби, который появился
-     */
+
     public void handleZombieSpawn(Zombie zombie) {
         if (random.nextDouble() < ConfigUtils.getInfectionChance()) {
             zombie.setCustomName(ChatUtils.color(ConfigUtils.getMessage("zombie-name")));
@@ -47,10 +42,7 @@ public class InfectionManager {
         }
     }
 
-    /**
-     * Заражение игрока вирусом
-     * @param player Игрок для заражения
-     */
+
     public void infectPlayer(Player player) {
         if (isInfected(player)) {
             player.sendMessage(ChatUtils.format(ConfigUtils.getMessage("already-infected")));
@@ -65,10 +57,7 @@ public class InfectionManager {
         player.sendMessage(ChatUtils.format(ConfigUtils.getMessage("infected")));
     }
 
-    /**
-     * Запуск задачи прогрессии стадии
-     * @param player Игрок
-     */
+
     private void startProgressionTask(Player player) {
         BukkitTask task = Bukkit.getScheduler().runTaskLater(ZombieVirus.getInstance(), () -> {
             if (!isInfected(player)) return;
@@ -78,10 +67,7 @@ public class InfectionManager {
         progressionTasks.put(player.getUniqueId(), task);
     }
 
-    /**
-     * Прогрессия заражения игрока на следующую стадию
-     * @param player Игрок
-     */
+
     public void progressInfection(Player player) {
         if (!isInfected(player)) return;
 
@@ -97,11 +83,7 @@ public class InfectionManager {
         startProgressionTask(player);
     }
 
-    /**
-     * Применение эффектов стадии к игроку
-     * @param player Игрок
-     * @param stage Стадия вируса
-     */
+
     private void applyStageEffects(Player player, VirusStage stage) {
         // Отменяем текущую задачу чихания
         cancelSneezeTask(player);
@@ -115,10 +97,7 @@ public class InfectionManager {
         startSneezeTask(player);
     }
 
-    /**
-     * Запуск задачи чихания
-     * @param player Игрок
-     */
+
     private void startSneezeTask(Player player) {
         VirusStage stage = infectedPlayers.get(player.getUniqueId());
         if (stage == null) return;
@@ -145,10 +124,7 @@ public class InfectionManager {
         sneezeTasks.put(player.getUniqueId(), task);
     }
 
-    /**
-     * Отмена задачи чихания
-     * @param player Игрок
-     */
+
     private void cancelSneezeTask(Player player) {
         BukkitTask task = sneezeTasks.remove(player.getUniqueId());
         if (task != null) {
@@ -156,10 +132,7 @@ public class InfectionManager {
         }
     }
 
-    /**
-     * Отмена задачи прогрессии
-     * @param player Игрок
-     */
+
     private void cancelProgressionTask(Player player) {
         BukkitTask task = progressionTasks.remove(player.getUniqueId());
         if (task != null) {
@@ -167,10 +140,7 @@ public class InfectionManager {
         }
     }
 
-    /**
-     * Лечение игрока от вируса
-     * @param player Игрок
-     */
+
     public void curePlayer(Player player) {
         if (!isInfected(player)) {
             player.sendMessage(ChatUtils.format(ConfigUtils.getMessage("not-infected")));
@@ -190,34 +160,21 @@ public class InfectionManager {
         player.sendMessage(ChatUtils.format(ConfigUtils.getMessage("cured")));
     }
 
-    /**
-     * Проверка, заражен ли игрок
-     * @param player Игрок
-     * @return true если игрок заражен
-     */
+
     public boolean isInfected(Player player) {
         return infectedPlayers.containsKey(player.getUniqueId());
     }
 
-    /**
-     * Получение стадии заражения игрока
-     * @param player Игрок
-     * @return Стадия вируса или null, если игрок не заражен
-     */
+
     public VirusStage getInfectionStage(Player player) {
         return infectedPlayers.getOrDefault(player.getUniqueId(), null);
     }
 
-    /**
-     * Сохранение всех данных
-     */
     public void saveAllData() {
         // TODO: Реализовать сохранение данных
     }
 
-    /**
-     * Очистка всех данных при выключении плагина
-     */
+
     public void clearAll() {
         // Отменяем все задачи чихания
         for (BukkitTask task : sneezeTasks.values()) {
