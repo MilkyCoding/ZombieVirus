@@ -1,0 +1,62 @@
+# ZombieVirus Configuration
+
+# Plugin prefix
+prefix: "&8[&#FF5555ZombieVirus&8] &r"
+
+# Debug mode
+debug: false
+
+# Infection settings
+infection:
+  # Chance for a zombie to be infected (0.0 - 1.0)
+  chance: 0.2
+  # Duration of each stage in seconds
+  stage-duration: 300
+  # Interval between sneezes in seconds
+  sneeze-interval: 120
+
+# Messages
+messages:
+  # General messages
+  prefix: "&8[&#FF5555ZombieVirus&8] &r"
+  reload: "&aКонфигурация перезагружена!"
+  no-permission: "&cУ вас нет прав для использования этой команды!"
+  
+  # Command messages
+  command-help: "&cИспользование: /zombievirus <status|cure|reload>"
+  player-only: "&cЭта команда только для игроков!"
+  cure-usage: "&cИспользование: /zombievirus cure <игрок>"
+  player-not-found: "&cИгрок не найден!"
+  player-cured: "&aИгрок %s был вылечен."
+  
+  # Infection messages
+  infected: "&cВы были заражены зомби-вирусом!"
+  stage-progress: "&cВаша инфекция прогрессирует до стадии %d!"
+  cured: "&aВы были вылечены от зомби-вируса!"
+  already-infected: "&cВы уже заражены!"
+  not-infected: "&cВы не заражены!"
+  zombie-name: "&cЗараженный зомби"
+  
+  # Stage messages
+  stage-1: "&eСтадия 1: Периодическое чихание"
+  stage-2: "&eСтадия 2: Учащенное чихание и возможность заражать других"
+  stage-3: "&eСтадия 3: Ослепление и замедление"
+  stage-4: "&eСтадия 4: Сильная слабость"
+  
+  # Vaccine messages
+  vaccine-name: "&aВакцина от зомби-вируса"
+  vaccine-lore-1: "&7Используйте, чтобы вылечиться"
+  vaccine-lore-2: "&7от зомби-вируса"
+  vaccine-created: "&aВы создали вакцину от зомби-вируса!"
+  vaccine-used: "&aВы использовали вакцину!"
+  vaccine-failed: "&cНе удалось создать вакцину!"
+  
+  # Command messages
+  command-help: |
+    &8&m-----------------------------------------------------
+    &c&lZombieVirus &7- &fКоманды
+    &8&m-----------------------------------------------------
+    &f/zombievirus status &7- &eПроверить статус заражения
+    &f/zombievirus cure <игрок> &7- &eВылечить игрока
+    &f/zombievirus reload &7- &eПерезагрузить конфигурацию
+    &8&m----------------------------------------------------- 

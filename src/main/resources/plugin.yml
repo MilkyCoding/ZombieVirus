@@ -1,4 +1,21 @@
 name: ZombieVirus
-version: '1.0-SNAPSHOT'
-main: me.milkycoding.zombieVirus.ZombieVirus
+version: '${project.version}'
+main: me.milkycoding.zombievirus.ZombieVirus
 api-version: '1.21'
+authors: [MilkyCoding]
+description: Плагин, добавляющий в игру зомби-вирус с различными стадиями заражения
+website: https://github.com/MilkyCoding/ZombieVirus
+
+commands:
+  zombievirus:
+    description: Основная команда плагина ZombieVirus
+    usage: /zombievirus <status|cure|reload>
+    aliases: [zv, virus]
+
+permissions:
+  zombievirus.admin:
+    description: Доступ к административным командам
+    default: op
+  zombievirus.cure:
+    description: Возможность лечить других игроков
+    default: op
